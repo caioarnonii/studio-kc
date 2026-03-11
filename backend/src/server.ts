@@ -1,18 +1,25 @@
-import express from "express"
-import clientRoutes from "./routes/clientRoutes"
-import procedureRoutes from "./routes/procedureRoutes"
+import express from "express";
+import cors from "cors";
 
-const app = express()
+import userRoutes from "./routes/userRoutes";
+import procedureRoutes from "./routes/procedureRoutes";
+import appointmentRoutes from "./routes/appointmentRoutes";
 
-app.use(express.json())
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use("/users", userRoutes);
+app.use("/procedures", procedureRoutes);
+app.use("/appointments", appointmentRoutes);
 
 app.get("/", (req, res) => {
-  res.send("API Studio KC funcionando 🚀")
-})
+  res.json({ message: "API do Studio KC rodando!" });
+});
 
-app.use("/clients", clientRoutes)
-app.use("/procedures", procedureRoutes)
+const PORT = 3000;
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000")
-})
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

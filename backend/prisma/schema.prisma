@@ -7,38 +7,55 @@ datasource db {
   provider = "postgresql"
 }
 
-model Client {
-  id        Int      @id @default(autoincrement())
-  name      String
-  phone     String?
-  email     String?
-  birthDate DateTime?
-  createdAt DateTime @default(now())
+enum UserRole {
+  CLIENT
+  EMPLOYEE
+  ADMIN
+}
 
-  appointments Appointment[]
+enum AppointmentStatus {
+  scheduled
+  completed
+  cancelled
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  phone     String?
+  password  String
+  role      UserRole  @default(CLIENT)
+
+  createdAt DateTime  @default(now())
+
+  appointmentsAsClient   Appointment[] @relation("ClientAppointments")
+  appointmentsAsEmployee Appointment[] @relation("EmployeeAppointments")
 }
 
 model Procedure {
   id        Int      @id @default(autoincrement())
   name      String
   price     Float
-  duration  Int      // duração em minutos
+  duration  Int
   createdAt DateTime @default(now())
 
   appointments Appointment[]
 }
 
 model Appointment {
-  id          Int       @id @default(autoincrement())
+  id          Int               @id @default(autoincrement())
   date        DateTime
-  status      String    @default("scheduled")
+  status      AppointmentStatus @default(scheduled)
   notes       String?
 
   clientId    Int
+  employeeId  Int
   procedureId Int
 
-  client      Client    @relation(fields: [clientId], references: [id])
+  client      User      @relation("ClientAppointments", fields: [clientId], references: [id])
+  employee    User      @relation("EmployeeAppointments", fields: [employeeId], references: [id])
   procedure   Procedure @relation(fields: [procedureId], references: [id])
 
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime @default(now())
 }
