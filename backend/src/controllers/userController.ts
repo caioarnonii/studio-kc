@@ -17,18 +17,30 @@ export const createUser = async (req, res) => {
 };
 
 export const getUsers = async (req, res) => {
-  const users = await prisma.user.findMany({
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      phone: true,
-      role: true,
-      createdAt: true
-    }
-  });
+  try {
+    const { role, search } = req.query;
 
-  res.json(users);
+    const where: any = {};
+
+    if (role) {
+      where.role = role;
+    }
+
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: "insensitive" } },
+        { email: { contains: search, mode: "insensitive" } },
+        { phone: { contains: search, mode: "insensitive" } }
+      ];
+    }
+
+    const users = await prisma.user.findMany({ where });
+
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro ao buscar usuários" });
+  }
 };
 
 export const getUserById = async (req, res) => {

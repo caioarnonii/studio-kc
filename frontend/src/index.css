@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 20% 98%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 10 29% 57%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 25 90% 75%;
+
+    --secondary: 30 15% 95%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 30 10% 94%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 20 40% 92%;
+    --accent-foreground: 15 60% 35%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 25 20% 88%;
+    --input: 25 15% 88%;
+    --ring: 15 70% 65%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 20 15% 97%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 10 29% 57%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 20 40% 92%;
+    --sidebar-accent-foreground: 15 60% 35%;
+    --sidebar-border: 25 20% 88%;
+    --sidebar-ring: 15 70% 65%;
+
+    --rose-gold: 15 70% 65%;
+    --rose-gold-light: 20 50% 90%;
+    --rose-gold-dark: 12 55% 45%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 350 45% 65%;
+    --primary-foreground: 240 10% 3.9%;
+    --primary-glow: 25 90% 75%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 15 30% 18%;
+    --accent-foreground: 20 50% 80%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 15 70% 65%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 350 45% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 15 30% 18%;
+    --sidebar-accent-foreground: 20 50% 80%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 15 70% 65%;
+    --rose-gold: 15 70% 65%;
+    --rose-gold-light: 15 30% 20%;
+    --rose-gold-dark: 12 55% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
